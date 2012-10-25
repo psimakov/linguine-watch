@@ -1,0 +1,29 @@
+#
+# This properties file is for MySqlReplTest; the names are case sensitive; 
+# double quotes must not be used around property values; # is the comment sign
+#
+
+# MySqlReplManager properties
+MySqlReplManager.Context.rootDbName=mysql
+MySqlReplManager.Context.dbName=MASTER
+MySqlReplManager.Context.tableName=_MASTERSTATUS
+MySqlReplManager.Context.tableCreatePostfix=type = InnoDB
+MySqlReplManager.Context.checkDelayMillis=5000
+MySqlReplManager.Context.purgeDelayMillis=300000
+MySqlReplManager.Context.canPurgeBinLogs=true
+MySqlReplManager.Context.ConnectionPool.masterConnStr=jdbc:mysql://localhost:3306/mysql?user=admin
+MySqlReplManager.Context.ConnectionPool.slaveConnStr=jdbc:mysql://localhost:3307/mysql?user=admin
+
+# LinguineSNMPWatch properties
+LinguineSNMPWatch.PerfAgentContext.collectDelayMillis=5000
+LinguineSNMPWatch.PerfAgentContext.snapshotDelayMillis=30000
+LinguineSNMPWatch.PerfAgentContext.snapshotFileName=c:/MySqlReplTest.html
+LinguineSNMPWatch.PerfAgentContext.maxHistoryRows=500
+
+# LinguineSNMPWatch properties
+LinguineSNMPWatch.SNMPAgentContext.port=161
+LinguineSNMPWatch.SNMPAgentContext.enterprisesOID=1
+LinguineSNMPWatch.SNMPAgentContext.organizationName=linguine watch
+LinguineSNMPWatch.SNMPAgentContext.contactInfo=http://www.softwaresecretweapons.com
+LinguineSNMPWatch.SNMPAgentContext.communityString=public
+LinguineSNMPWatch.SNMPAgentContext.namespace=oylw_

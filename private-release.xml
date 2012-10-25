@@ -1,0 +1,32 @@
+<project name="Release" default="build" basedir=".">
+
+	<import file="build-inc.xml" />
+	
+	<target name="build">							
+		
+		<ant antfile="build.xml" target="build" />
+		
+		<!-- source -->
+		<delete dir="${dist}/dist/src"/> 
+		<copy todir="${dist}/src/" overwrite="true">
+			<fileset dir="${src}/" includes="**/*.*"/>
+		</copy>								
+
+		<!-- misc -->
+		<copy todir="${dist}" overwrite="true">
+			<fileset dir="." includes="*.*" excludes="private*.*"/>
+		</copy>	
+	
+		<!-- delete build -->
+		<delete dir="${dist}/build"/> 
+	
+		<!-- zip release --> 
+		<delete dir="${release}"/> 
+		<mkdir dir="${release}"/>
+	  	<zip destfile="${release}/oy-lw-${build.number}.zip">
+	  		 <zipfileset dir="${dist}" prefix="oy-lw-${build.number}"/>
+  		</zip>
+  		
+	</target>
+		
+</project>

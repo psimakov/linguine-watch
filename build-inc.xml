@@ -1,0 +1,15 @@
+<project name="Properties" basedir=".">
+
+	<property name="build.number" value="1.2"/>		
+	<property name="build.minor" value="1"/>			
+	
+	<property name="bin"  		location="bin"/>	
+	<property name="build"		location="build"/>	
+	<property name="dist"  		location="dist"/>		
+	<property name="doc" 		location="doc"/>	
+	<property name="dist"  		location="dist"/>	
+	<property name="lib"  		location="lib"/>
+	<property name="release"  	location="release"/>
+	<property name="src"  		location="src"/>	
+	
+</project>

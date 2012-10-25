@@ -1,0 +1,71 @@
+<project name="Build" default="build" basedir=".">
+
+	<import file="build-inc.xml" />
+	
+	<path id="classpath" description="+ Classpath for compilation">	
+		<pathelement location="${build}"/> 		
+		<fileset dir="${lib}"> 
+			  <include name="*.jar"/> 
+		</fileset>
+	</path>	
+	
+	<target name="init" description="+ Create and clean folders">
+		<delete dir="${build}"/>
+		<mkdir dir="${build}"/>			
+	</target>	
+	 
+	<target name="compile" depends="init" description="+ Compile sources" >	
+		<javac 
+			srcdir="${src}" 
+			destdir="${build}"
+			classpathref="classpath" 
+			debug="on"
+		/>				
+	</target>
+			
+	<target name="dist" depends="compile" description="+ Generate binary distribution" >							
+		
+		<delete dir="${dist}"/> 
+		<mkdir dir="${dist}"/>
+		
+		<!-- Build number -->
+		<delete file="${dist}/build.number"/>		
+		<propertyfile file="${dist}/build.number" comment="AUTO GENERATED! DO NOT CHANGE BY HAND!">
+			<entry key="build.number" value="${build.number}"/>
+		</propertyfile>		
+				
+		<!-- jar -->
+		<mkdir dir="${dist}/lib"/>
+		<jar jarfile="${dist}/lib/oy-lw-${build.number}.jar" basedir="${build}" includes="com/oy/,snmp/"/>						
+		
+		<!-- other jars -->
+		<copy todir="${dist}/lib" description="+ Other jar files" overwrite="true">
+		    <fileset dir="${lib}" includes="**/*.jar"/>
+        </copy>			
+				
+	</target>	
+	
+	<target name="javadoc" description="+ Generate API documentation" >
+		<delete dir="${doc}/api" />
+		<mkdir dir="${doc}/api" />
+		<javadoc 	
+			destdir="${doc}/api" 
+			packagenames="com.*"
+			sourcepath="${src}" 
+			windowtitle="Linguine Watch ${build.number} Documentation"
+			useexternalfile="yes"
+			private="true">
+			<doctitle><![CDATA[<h1>Linguine Watch ${build.number} Documentation</h1>]]></doctitle>
+			<bottom><![CDATA[
+				<b>
+					Copyright (C) 2005-2006 Pavel Simakov
+					<br>
+					<a href="http://www.softwaresecretweapons.com" target="_blank">http://www.softwaresecretweapons.com</a>
+				</b>
+				]]></bottom>			
+		</javadoc>
+	</target>	
+	 
+	<target name="build" depends="init, compile, dist, javadoc" description="+ Execute build"/>	
+	
+</project>
